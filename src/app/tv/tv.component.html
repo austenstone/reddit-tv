@@ -1,0 +1,35 @@
+<!-- <h1 class="mat-h1">{{currentRedditVideo?.title}}</h1>
+<span>Score: {{currentRedditVideo?.score}}</span>
+<span>URL: {{currentRedditVideo?.url}}</span>
+<div>
+  <mat-form-field>
+    <mat-label>Sort</mat-label>
+    <mat-select [(value)]="listingType" (selectionChange)="changeListing($event)">
+      <mat-option value="hot">Hot</mat-option>
+      <mat-option value="top">Top</mat-option>
+      <mat-option value="new">New</mat-option>
+      <mat-option value="rising">Rising</mat-option>
+    </mat-select>
+    </mat-form-field>
+</div> -->
+
+<nav>
+  <div class="subreddit-title" [style.color]="isSubredditValid ? '#212121' : '#d8432e'">
+    <span>/r/</span><input [(ngModel)]="currentSubredditTitle" (keyup)="currentSubredditTitleChanged()" spellcheck="false">
+  </div>
+</nav>
+
+<div class="video-player">
+  <app-video-player [currentVideoYoutubeId]="currentVideoYoutubeId"></app-video-player>
+</div>
+
+<div class="thumbnails">
+  <div class="carousel" [ngStyle]="{'transform': 'translateX(' + thumbnailsX + 'px)'}">
+    <ng-container *ngFor="let child of redditData.children; let i = index">
+      <div *ngIf="child.data.thumbnail || child.data.secure_media?.oembed.thumbnail_url" class="thumbnail"
+      [class.active]="currentRedditVideo.title === child.data.title" (click)="changeVideo(child.data, i)">
+        <img [src]="child.data.thumbnail || child.data.secure_media?.oembed.thumbnail_url" [alt]="child.data.title">
+      </div>
+    </ng-container>
+  </div>
+</div>

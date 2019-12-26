@@ -1,0 +1,84 @@
+:host {
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+nav {
+  background-color: black;
+}
+
+.thumbnails {
+  height:200px;
+  width:100%;
+  overflow-x:scroll;
+  overflow:hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+
+.thumbnails:before {
+  z-index: 3;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: #262626;
+  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(38, 38, 38, 0) 50%, rgb(0, 0, 0) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.carousel {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+}
+
+.thumbnail {
+  z-index: 1;
+  max-height: 105px;
+  width: 12vw;
+  min-width: 75px;
+  max-width: 150px;
+  overflow: hidden;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: .2s;
+  margin: 0 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.thumbnail:first-child {
+}
+
+.thumbnail:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.thumbnail img {
+  width:100%;
+}
+
+.thumbnail.active {
+  z-index: 2;
+  transform: scale(1.5);
+  border: solid white 1px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.video-player {
+  flex:1;
+}
+

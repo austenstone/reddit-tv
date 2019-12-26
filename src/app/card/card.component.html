@@ -1,0 +1,23 @@
+<div *ngFor="let child of topData?.children">
+
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" [style.backgroundImage]="'url('+ child.data.thumbnail +')'"></div>
+      <mat-card-title>{{child.data.title}}</mat-card-title>
+      <mat-card-subtitle>{{child.data.author}} - {{child.data.created * 1000 | date:'EEEE, MMMM d, y, h:mma'}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="child.data.thumbnail" alt="Photo of a Shiba Inu">
+    <!-- <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content> -->
+    <mat-card-actions>
+      <a [href]="'https://reddit.com' + child.data.permalink" target="_blank"><button mat-button>Reddit</button></a>
+      <a [href]="'https://reddit.com' + child.data.permalink" target="_blank"><button mat-button>YouTube</button></a>
+    </mat-card-actions>
+  </mat-card>
+
+</div>
