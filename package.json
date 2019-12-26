@@ -5,6 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build_base": "ng build --base-href=/reddit-tv/",
+    "build_and_deploy": "npm run build_base && npm run clean-dest && npm run copy-dist",
+    "copy-dist": "cp -r ./dist/reddit-tv /var/www/html/reddit-tv",
+    "clean-dest": "rm -r /var/www/html/reddit-tv",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -14,8 +14,22 @@
 </div> -->
 
 <nav>
-  <div class="subreddit-title" [style.color]="isSubredditValid ? '#212121' : '#d8432e'">
+  <div class="subreddit-title" [style.color]="isSubredditValid ? 'inherit' : '#d8432e'">
     <span>/r/</span><input [(ngModel)]="currentSubredditTitle" (keyup)="currentSubredditTitleChanged()" spellcheck="false">
+    <mat-form-field>
+      <mat-label>Sort</mat-label>
+      <mat-select [(value)]="listingType" (selectionChange)="changeListing($event.value)">
+        <mat-option value="hot">Hot</mat-option>
+        <mat-option value="top">Top</mat-option>
+        <mat-option value="new">New</mat-option>
+        <mat-option value="rising">Rising</mat-option>
+      </mat-select>
+      </mat-form-field>
+  </div>
+  <div class="video-title" *ngIf="currentRedditVideo">
+    <a href="https://www.reddit.com/{{currentRedditVideo.permalink}}" target="_blank">
+      <h1 class="mat-h4" >{{currentRedditVideo.title}}</h1>
+    </a>
   </div>
 </nav>
 

@@ -35,12 +35,11 @@ export class TvComponent implements OnInit {
     }
     this.currentVideoId = this.route.snapshot.paramMap.get('id');
 
-    this.changeListing({value: 'top'});
+    this.changeListing('top');
   }
 
-  changeListing(listingType) {
+  changeListing(type) {
     let observable;
-    const type = listingType.value;
 
     if (type === 'hot') {
       observable = this.redditService.getHot(this.currentSubredditTitle);
@@ -62,7 +61,13 @@ export class TvComponent implements OnInit {
 
         this.redditData.children = this.redditData.children.filter((child) => child.data.url.match('youtube'));
 
-        this.changeVideo(this.redditData.children[0].data, 0);
+        const foundVideoIndex = this.redditData.children.findIndex((child) => child.data.id === this.currentVideoId);
+        if (foundVideoIndex > -1) {
+          this.changeVideo(this.redditData.children[foundVideoIndex].data, foundVideoIndex);
+        } else {
+          this.changeVideo(this.redditData.children[0].data, 0);
+        }
+
       }, (err) => this.isSubredditValid = false);
     }
   }
@@ -75,20 +80,13 @@ export class TvComponent implements OnInit {
     this.thumbnailsX = -videoIndex * 150;
   }
 
-  getVideoByTitle(title: string): ChildData {
-    const videoData = this.redditData.children.find((child) => child.data.title === this.currentVideoId);
-    if (videoData) {
-      return videoData.data;
-    }
-  }
-
   getVideoYoutubeId(videoData: ChildData) {
     if (videoData && videoData.url) {
       return videoData.url.substr(videoData.url.length - 11, 11);
     }
   }
 
-  currentSubredditTitleChanged(e) {
+  currentSubredditTitleChanged() {
     console.log('currentSubredditTitleChanged', this.currentSubredditTitle);
     this.changeListing({value: 'top'});
   }
